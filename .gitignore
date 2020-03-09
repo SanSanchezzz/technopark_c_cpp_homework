@@ -2,4 +2,4 @@
 *.exe
 Makefile
 
-**/tmp/**
+**/build/**
