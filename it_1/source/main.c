@@ -47,7 +47,6 @@ int main()
     else if (flag == INCORRECT_INPUT)
     {
         printf("Error entering road network information.\n");
-        free(road_network);
     }
     else if (flag == ALLOCATE_ERROR)
     {

@@ -61,6 +61,7 @@ int read_data(road_t **road_network, int *lenght_array)
         printf("Record %d: ", i + 1);
         if ((read_record(&(*road_network)[i]))!= 0)
         {
+            free(*road_network);
             return INCORRECT_INPUT;
         }
         printf("\n");

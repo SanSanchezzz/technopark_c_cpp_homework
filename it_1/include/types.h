@@ -7,6 +7,7 @@
 #define ALLOCATE_ERROR -2
 #define INCORRECT_INPUT -3
 #define NO_ROADS -4
+#define NULL_PASSED -5
 
 typedef struct road road_t;
 struct road
