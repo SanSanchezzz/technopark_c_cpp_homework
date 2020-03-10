@@ -27,7 +27,7 @@ before_script:
 jobs:
   include:
     - stage: "memcheck"
-      script: valgrind --error-exitcode=1 --leak-check=full -q ./it_1 < in_1.txt
+      script: valgrind --error-exitcode=1 --leak-check=full -q ./it_1 < test_in/in_1.txt
 
     - stage: "gtest"
       script: ./my_test
