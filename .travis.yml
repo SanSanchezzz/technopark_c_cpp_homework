@@ -7,8 +7,8 @@ addons:
     - libgtest-dev
     - lcov
 
-env:
-  - DIR=it_1/build
+#env:
+#  - DIR=it_1
 language: cpp
 
 before_install:
@@ -19,8 +19,8 @@ before_install:
 - cd -
 
 before_script:
-- cd $DIR
-- cmake CMakeLists.txt
+- cd it_1/build
+- cmake ../CMakeLists.txt
 - make
 - ls
 
