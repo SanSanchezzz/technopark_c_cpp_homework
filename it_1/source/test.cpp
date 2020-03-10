@@ -135,6 +135,44 @@ TEST(read_func, incorrect_input_4)
     ASSERT_EQ(result, INCORRECT_INPUT);
 }
 
+TEST(read_func_inquiry, correct_work)
+{
+    freopen("../test_in/in_7.txt", "r", stdin);
+
+    int flag;
+    int type_of_road, number_of_lanes;
+
+    flag = read_inquiry(&type_of_road, &number_of_lanes);
+
+    ASSERT_EQ(flag, OK);
+    ASSERT_EQ(type_of_road, 2);
+    ASSERT_EQ(number_of_lanes, 2);
+}
+
+TEST(read_func_inquiry, incorrect_input_1)
+{
+    freopen("../test_in/in_8.txt", "r", stdin);
+
+    int flag;
+    int type_of_road, number_of_lanes;
+
+    flag = read_inquiry(&type_of_road, &number_of_lanes);
+
+    ASSERT_EQ(flag, INCORRECT_INPUT);
+}
+
+TEST(read_func_inquiry, incorrect_input_2)
+{
+    freopen("../test_in/in_9.txt", "r", stdin);
+
+    int flag;
+    int type_of_road, number_of_lanes;
+
+    flag = read_inquiry(&type_of_road, &number_of_lanes);
+
+    ASSERT_EQ(flag, INCORRECT_INPUT);
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

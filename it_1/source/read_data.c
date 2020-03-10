@@ -10,7 +10,10 @@ int read_inquiry(int *type_of_road, int *number_of_lanes)
     {
         return INCORRECT_INPUT;
     }
-
+    else if (*type_of_road <= 0 || *number_of_lanes <= 0)
+    {
+        return INCORRECT_INPUT;
+    }
     return OK;
 }
 
