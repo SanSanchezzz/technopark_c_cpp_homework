@@ -1,0 +1,40 @@
+addons:
+  apt:
+    update: true
+    packages:
+    - valgrind
+    - cmake
+    - libgtest-dev
+    - lcov
+
+env:
+  - DIR=it_1/build
+language: cpp
+
+before_install:
+- cd /usr/src/gtest
+- sudo cmake CMakeLists.txt || (cat CMakeFiles/CMakeError.log && CMakeFiles/CMakeOutput.log)
+- sudo make
+- sudo cp *.a /usr/lib
+- cd -
+
+before_script:
+- cd $DIR
+- cmake CMakeLists.txt
+- make
+- ls
+
+jobs:
+  include:
+    - stage: "memcheck"
+      script: valgrind --error-exitcode=1 --leak-check=full -q ./it_1 < in_1.txt
+
+    - stage: "gtest"
+      script: ./my_test
+      after_success:
+      - lcov --directory . --capture --output-file coverage.info
+      - lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info
+      - lcov --list coverage.info
+      - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+
+after_script: make clean
