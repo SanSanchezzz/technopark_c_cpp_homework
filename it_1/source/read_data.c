@@ -34,7 +34,6 @@ int read_record(road_t *record)
          return INCORRECT_INPUT;
      }
 
-    /*printf("|%d|%d|%d|%d|\n", record->lenght_of_road, record->road_quality, record->number_of_lanes, record->type_of_road);*/
     return OK;
 }
 
