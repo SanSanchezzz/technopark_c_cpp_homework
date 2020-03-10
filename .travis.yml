@@ -20,8 +20,7 @@ before_install:
 
 before_script:
 - cd $DIR
-- cd build
-- cmake ../CMakeLists.txt
+- cmake CMakeLists.txt
 - make
 - ls
 
