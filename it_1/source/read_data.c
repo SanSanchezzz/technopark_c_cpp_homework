@@ -37,10 +37,10 @@ int read_record(road_t *record)
     return OK;
 }
 
-int read_data(road_t **road_network, int *lenght_array)
+int read_data(road_t **road_network, size_t *lenght_array)
 {
     printf("Enter the number of entries: ");
-    if (scanf("%d", lenght_array) != 1)
+    if (scanf("%ld", lenght_array) != 1)
     {
         return INCORRECT_INPUT;
     }
@@ -50,7 +50,7 @@ int read_data(road_t **road_network, int *lenght_array)
         return INCORRECT_INPUT;
     }
 
-    *road_network = allocate_struct(*lenght_array);
+    *road_network = (road_t*)malloc(sizeof(road_t) * (*lenght_array));
     if (!(*road_network))
     {
         return ALLOCATE_ERROR;
@@ -58,9 +58,9 @@ int read_data(road_t **road_network, int *lenght_array)
 
     printf("Record input format:\n");
     printf("<road length> <type of roadway> <coverage quality> <number of traffic lanes>\n");
-    for (int i = 0; i < *lenght_array; i++)
+    for (size_t i = 0; i < *lenght_array; i++)
     {
-        printf("Record %d: ", i + 1);
+        printf("Record %ld: ", i + 1);
         if ((read_record(&(*road_network)[i]))!= 0)
         {
             free(*road_network);

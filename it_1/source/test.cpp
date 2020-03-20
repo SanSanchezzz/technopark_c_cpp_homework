@@ -31,7 +31,7 @@ TEST(process_func, correct_work)
     freopen("../test_in/in_1.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
     int result;
 
     read_data(&road_network, &len);
@@ -48,7 +48,7 @@ TEST(process_func, no_roads)
     freopen("../test_in/in_2.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
     int result;
 
     read_data(&road_network, &len);
@@ -65,8 +65,8 @@ TEST(read_func, correct_input)
     freopen("../test_in/in_1.txt", "r", stdin);
 
     road_t *road_network;
-    int len_1;
-    int len_2 = 2;
+    size_t len_1;
+    size_t len_2 = 2;
     road_t expect_array[len_2];
 
     expect_array[0].lenght_of_road = 50000;
@@ -92,7 +92,7 @@ TEST(read_func, incorrect_input_1)
     freopen("../test_in/in_3.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
 
     int result = read_data(&road_network, &len);
 
@@ -104,7 +104,7 @@ TEST(read_func, incorrect_input_2)
     freopen("../test_in/in_4.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
 
     int result = read_data(&road_network, &len);
 
@@ -116,7 +116,7 @@ TEST(read_func, incorrect_input_3)
     freopen("../test_in/in_5.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
 
     int result = read_data(&road_network, &len);
 
@@ -128,7 +128,7 @@ TEST(read_func, incorrect_input_4)
     freopen("../test_in/in_6.txt", "r", stdin);
 
     road_t *road_network;
-    int len;
+    size_t len;
 
     int result = read_data(&road_network, &len);
 

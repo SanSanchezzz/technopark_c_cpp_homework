@@ -19,7 +19,7 @@ set(INC
 
 set(SRC
     #source/main.c
-    source/memory_work.c
+    #source/memory_work.c
     source/read_data.c
     source/process.c
 )
