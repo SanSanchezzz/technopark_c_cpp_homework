@@ -15,12 +15,14 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 set(INC
    include/types.h
+   include/single_proc.h
 )
 
 set(SRC
     #source/main.c
     #source/memory_work.c
-#    source/read_data.c
+    source/work_data.c
+    source/single_proc.c
 #    source/process.c
 )
 
