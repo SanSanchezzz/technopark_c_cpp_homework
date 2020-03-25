@@ -6,7 +6,7 @@
 #include "types.h"
 #include "read_data.h"
 /*#include "single_proc.h"*/
-#include "multy_proc.h"
+/*#include "multy_proc.h"*/
 
 void test_print(position_t *pos_array, int len)
 {
@@ -25,6 +25,13 @@ int main(int argc, char **argv)
         return -1;
     }
 
+    void *my_lib;
+    my_lib = dlopen("../build/libmulty_proc.so", RTLD_LAZY);
+    if (!my_lib)
+    {
+        error_handler(ERROR_LIB);
+    }
+    // work there!
     char *file_name = argv[1];
 
     int err_code;
@@ -51,7 +58,16 @@ int main(int argc, char **argv)
     test_print(&result_sequential, 1);
 
     position_t result_parallel;
-    err_code = average_value_parallel(&result_parallel, pos_array, len);
+    int(*parallel_proc)(position_t *, position_t *, int) = dlsym(my_lib, "average_value_parallel");
+    if (!parallel_proc)
+    {
+        free(pos_array);
+        error_handler(ERROR_LIB);
+        return ERROR_LIB;
+    }
+    /*err_code = (int (*)(position_t *, position_t *, int))*/
+        /*(dlsym(my_lib, "average_value_parallel"));*/
+    err_code = parallel_proc(&result_parallel, pos_array, len);
     if (err_code != OK)
     {
         free(pos_array);
@@ -78,6 +94,9 @@ void error_handler(int err_code)
             break;
         case ERROR_ALLOC:
             printf("allerr\n");
+            break;
+        case ERROR_LIB:
+            printf("liberr\n");
             break;
         default:
             printf("err\n");

@@ -14,10 +14,10 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(INC
-   include/types.h
-   include/single_proc.h
-   include/multy_proc.h
-   include/read_data.h
+   source/types.h
+   source/single_proc.h
+   source/multy_proc.h
+   source/read_data.h
 )
 
 set(SRC
@@ -29,8 +29,8 @@ set(SRC
 #    source/process.c
 )
 
-add_library(single_proc STATIC include/single_proc.h source/single_proc.c)
-
+add_library(single_proc STATIC source/single_proc.c)
+add_library(multy_proc SHARED source/multy_proc.c)
 add_executable(it_2
     ${INC}
     source/main.c
@@ -49,7 +49,7 @@ target_link_libraries(it_2 single_proc dl)
 
 target_include_directories(it_2
     PUBLIC
-        "include"
+        "source"
 )
 #target_include_directories(my_test
     #PUBLIC
