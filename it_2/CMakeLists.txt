@@ -35,22 +35,23 @@ add_executable(it_2
 )
 target_link_libraries(it_2 single_proc dl)
 
-#add_executable(my_test
-    #${INC}
-    #source/test.cpp
-    #${SRC})
-#enable_testing()
-#add_test(gtest ${EXECUTABLE_OUTPUT_PATH}/tests_gtest)
-#add_definitions(-fprofile-arcs -ftest-coverage)
-#target_link_libraries(my_test -fprofile-arcs)
+add_executable(my_test
+    ${INC}
+    source/my_test.h
+    source/my_test.cpp
+    ${SRC})
+enable_testing()
+add_test(gtest ${EXECUTABLE_OUTPUT_PATH}/tests_gtest)
+add_definitions(-fprofile-arcs -ftest-coverage)
+target_link_libraries(my_test -fprofile-arcs)
 
 target_include_directories(it_2
     PUBLIC
         "source"
 )
-#target_include_directories(my_test
-    #PUBLIC
-        #"include"
-#)
+target_include_directories(my_test
+    PUBLIC
+        "source"
+)
 
-#target_link_libraries(my_test ${GTEST_LIBRARIES} pthread)
+target_link_libraries(my_test ${GTEST_LIBRARIES} pthread)
