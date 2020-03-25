@@ -1,15 +1,55 @@
 #include "multy_proc.h"
 
 int *set_borders(int borders_qty, int len);
-void border_sum(int left_border, int right_border, position_t *positions, position_t *result);
-void child_work(position_t *positions, position_t *result, int *borders, int num_child);
+void border_sum(const int left_border, const int right_border, const position_t *positions, position_t *result);
+/*void child_work(const position_t *positions, position_t *result, const int *borders, const int num_child);*/
 
-int average_value_parallel(position_t *result, position_t *positions, int len)
+void child_work(const position_t *positions, const int *borders, const int num_child, position_t *tmp_result);
+/*int average_value_parallel(position_t *result, const position_t *positions, const int len)*/
+/*{*/
+    /*if (positions == NULL || len <= 0)*/
+    /*{*/
+        /*return ERROR_FUNC;*/
+    /*}*/
+
+    /*result->x = 0;*/
+    /*result->y = 0;*/
+    /*result->z = 0;*/
+
+    /*int child_qty = get_nprocs();*/
+
+    /*pid_t pid, child_pids[child_qty];*/
+/*// проверка на длину вектора и кол-во процессов*/
+    /*int *borders = set_borders(child_qty, len);*/
+    /*if (!borders)*/
+    /*{*/
+        /*return ERROR_ALLOC;*/
+    /*}*/
+
+    /*for (int i = 0; i < child_qty; i++)*/
+    /*{*/
+        /*child_work(positions, result, borders, i);*/
+    /*}*/
+
+    /*result->x = result->x / len;*/
+    /*result->y = result->y / len;*/
+    /*result->z = result->z / len;*/
+
+    /*free(borders);*/
+
+    /*return OK;*/
+/*}*/
+
+int average_value_parallel(position_t *result, const position_t *positions, const int len)
 {
-    position_t *result_tmp = mmap(NULL, sizeof(position_t), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    result_tmp->x = 0;
-    result_tmp->y = 0;
-    result_tmp->z = 0;
+    if (positions == NULL || len <= 0)
+    {
+        return ERROR_FUNC;
+    }
+
+    result->x = 0;
+    result->y = 0;
+    result->z = 0;
 
     int child_qty = get_nprocs();
 
@@ -20,6 +60,14 @@ int average_value_parallel(position_t *result, position_t *positions, int len)
     {
         return ERROR_ALLOC;
     }
+    position_t *tmp_result = mmap(NULL, sizeof(position_t) * child_qty, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    /*position_t *tmp_result = malloc(sizeof(position_t) * (size_t) child_qty);*/
+    for (int i = 0; i < child_qty; i++)
+    {
+        tmp_result[i].x = 0;
+        tmp_result[i].y = 0;
+        tmp_result[i].z = 0;
+    }
 
     for (int i = 0; i < child_qty; i++)
     {
@@ -27,12 +75,13 @@ int average_value_parallel(position_t *result, position_t *positions, int len)
 
         if (pid < 0)
         {
-            free(borders);
-            printf("Fork Err\n");
+            perror("Fork\n");
+
+            exit(FORK_ERROR);
         }
         if (pid == 0)
         {
-            child_work(positions, result_tmp, borders, i);
+            child_work(positions, borders, i, &tmp_result[i]);
             exit(EXIT_SUCCESS);
         }
         else
@@ -40,41 +89,147 @@ int average_value_parallel(position_t *result, position_t *positions, int len)
             child_pids[i] = pid;
         }
     }
-
-    free(borders);
-
-/*    for (int i = 0; i < child_qty; i++)*/
-    /*{*/
-        /*int status;*/
-
-        /*if (wait(&status))*/
-        /*{*/
-            /*return -1;*/
-        /*}*/
-    /*}*/
-
     int status;
+    pid_t child_pid;
 
-    for (int i = 0; i < child_qty; i++)
+    while ((child_pid = wait(&status)) != -1 && errno != ECHILD)
     {
-        waitpid(child_pids[i], &status, 0);
-
-        if (WIFSIGNALED(status))
+        if (WIFEXITED(status))
         {
-            printf("Wait error\n");
+            printf("parent: child %d terminated normally with %d rc\n",
+                   child_pid, WEXITSTATUS(status));
+        }
+        else
+        {
+            printf("parent: child %d terminated abnormally with %d rc\n",
+                   child_pid, WEXITSTATUS(status));
         }
     }
 
-    result->x = result_tmp->x / len;
-    result->y = result_tmp->y / len;
-    result->z = result_tmp->z / len;
+    if (errno != ECHILD)
+    {
+        perror("wait");
 
-    munmap(result_tmp, sizeof(position_t));
+        exit(1);
+    }
+
+/*[>    int status = 0;<]*/
+
+    /*[>for (int i = 0; i < child_qty; i++)<]*/
+    /*[>{<]*/
+        /*[>waitpid(child_pids[i], &status, 0);<]*/
+
+        /*[>if (WIFSIGNALED(status))<]*/
+        /*[>{<]*/
+            /*[>printf("Wait error\n");<]*/
+        /*[>}<]*/
+    /*[>}<]*/
+
+    for (int i = 0; i < child_qty; i++)
+    {
+        result->x += tmp_result[i].x;
+        result->y += tmp_result[i].y;
+        result->z += tmp_result[i].z;
+    }
+
+    result->x = result->x / len;
+    result->y = result->y / len;
+    result->z = result->z / len;
+    munmap(tmp_result, sizeof(position_t) * child_qty);
+    free(borders);
 
     return OK;
 }
 
-void border_sum(int left_border, int right_border, position_t *positions, position_t *result)
+/*int average_value_parallel(position_t *result, const position_t *positions, const int len)*/
+/*{*/
+    /*if (positions == NULL || len <= 0)*/
+    /*{*/
+        /*return ERROR_FUNC;*/
+    /*}*/
+
+    /*position_t *result_tmp = mmap(NULL, sizeof(position_t), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);*/
+    /*result_tmp->x = 0;*/
+    /*result_tmp->y = 0;*/
+    /*result_tmp->z = 0;*/
+
+    /*int child_qty = get_nprocs();*/
+
+    /*pid_t pid, child_pids[child_qty];*/
+/*// проверка на длину вектора и кол-во процессов*/
+    /*int *borders = set_borders(child_qty, len);*/
+    /*if (!borders)*/
+    /*{*/
+        /*return ERROR_ALLOC;*/
+    /*}*/
+
+    /*for (int i = 0; i < child_qty; i++)*/
+    /*{*/
+        /*pid = fork();*/
+
+        /*if (pid < 0)*/
+        /*{*/
+            /*perror("Fork\n");*/
+
+            /*exit(FORK_ERROR);*/
+        /*}*/
+        /*if (pid == 0)*/
+        /*{*/
+            /*child_work(positions, result_tmp, borders, i);*/
+            /*exit(EXIT_SUCCESS);*/
+        /*}*/
+        /*else*/
+        /*{*/
+            /*child_pids[i] = pid;*/
+        /*}*/
+    /*}*/
+    /*int status;*/
+    /*pid_t child_pid;*/
+
+    /*while ((child_pid = wait(&status)) != -1 && errno != ECHILD)*/
+    /*{*/
+        /*if (WIFEXITED(status))*/
+        /*{*/
+            /*printf("parent: child %d terminated normally with %d rc\n",*/
+                   /*child_pid, WEXITSTATUS(status));*/
+        /*}*/
+        /*else*/
+        /*{*/
+            /*printf("parent: child %d terminated abnormally with %d rc\n",*/
+                   /*child_pid, WEXITSTATUS(status));*/
+        /*}*/
+    /*}*/
+
+    /*if (errno != ECHILD)*/
+    /*{*/
+        /*perror("wait");*/
+
+        /*exit(1);*/
+    /*}*/
+
+/*[>[>    int status = 0;<]<]*/
+
+    /*[>[>for (int i = 0; i < child_qty; i++)<]<]*/
+    /*[>[>{<]<]*/
+        /*[>[>waitpid(child_pids[i], &status, 0);<]<]*/
+
+        /*[>[>if (WIFSIGNALED(status))<]<]*/
+        /*[>[>{<]<]*/
+            /*[>[>printf("Wait error\n");<]<]*/
+        /*[>[>}<]<]*/
+    /*[>[>}<]<]*/
+
+    /*result->x = result_tmp->x / len;*/
+    /*result->y = result_tmp->y / len;*/
+    /*result->z = result_tmp->z / len;*/
+
+    /*free(borders);*/
+    /*munmap(result_tmp, sizeof(position_t));*/
+
+    /*return OK;*/
+/*}*/
+
+void border_sum(const int left_border, const int right_border, const position_t *positions, position_t *result)
 {
     for (int i = left_border; i <= right_border; i++)
     {
@@ -83,21 +238,36 @@ void border_sum(int left_border, int right_border, position_t *positions, positi
         (*result).z += positions[i].z;
     }
 }
-
-void child_work(position_t *positions, position_t *result, int *borders, int num_child)
+void child_work(const position_t *positions, const int *borders, const int num_child, position_t *tmp_result)
 {
     if (num_child == 0)
     {
-        border_sum(0, borders[0], positions, result);
+        border_sum(0, borders[0], positions, tmp_result);
     }
     else
     {
-        border_sum(borders[num_child - 1] + 1, borders[num_child], positions, result);
+        border_sum(borders[num_child - 1] + 1, borders[num_child], positions, tmp_result);
     }
 }
+/*void child_work(const position_t *positions, position_t *result, const int *borders, const int num_child)*/
+/*{*/
+    /*if (num_child == 0)*/
+    /*{*/
+        /*border_sum(0, borders[0], positions, result);*/
+    /*}*/
+    /*else*/
+    /*{*/
+        /*border_sum(borders[num_child - 1] + 1, borders[num_child], positions, result);*/
+    /*}*/
+/*}*/
 
 int *set_borders(int borders_qty, int len)
 {
+    if (borders_qty <= 0)
+    {
+        return NULL;
+    }
+
     int *borders = malloc(sizeof(int) * borders_qty);
     if (!borders)
     {

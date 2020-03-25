@@ -22,9 +22,7 @@ int read_data(position_t **pos_array, int *len, char *file_name)
         return ERROR_DATA;
     }
 
-    printf("len = %d\n", *len);
-
-    *pos_array = malloc(sizeof(position_t) * (*len));
+    *pos_array = malloc(sizeof(position_t) * ((size_t)*len));
     if (!(*pos_array))
     {
         fclose(file);
