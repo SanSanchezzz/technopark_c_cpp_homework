@@ -1,12 +1,27 @@
 [
 {
-  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/other",
-  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/other -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/main.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/main.c",
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/single_proc.dir/source/single_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/main.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/main.c",
   "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/main.c"
 },
 {
-  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/other",
-  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/other -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/work_data.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c",
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/work_data.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c",
   "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/single_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/include  -g -O0 -Wall -W -fprofile-arcs -ftest-coverage   -std=gnu99 -o CMakeFiles/it_2.dir/source/multy_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c"
 }
 ]

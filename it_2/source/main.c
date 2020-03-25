@@ -1,9 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/sysinfo.h>
+#include <dlfcn.h>
 
 #include "types.h"
-#include "single_proc.h"
+#include "read_data.h"
+/*#include "single_proc.h"*/
+#include "multy_proc.h"
 
 void test_print(position_t *pos_array, int len)
 {
@@ -25,24 +28,38 @@ int main(int argc, char **argv)
     char *file_name = argv[1];
 
     int err_code;
-    int child_count = get_nprocs();
-    printf("Hello, world! = %d\n", child_count);
 
     position_t *pos_array = NULL;
     int len;
 
     err_code = read_data(&pos_array, &len, file_name);
-    if (!err_code)
+    if (err_code != OK)
     {
         error_handler(err_code);
         return err_code;
     }
-    test_print(pos_array, len);
+    /*test_print(pos_array, len);*/
 
-    // work there!
     position_t result_sequential;
-    result_sequential = average_value_sequential(pos_array, len);
+    err_code = average_value_sequential(&result_sequential, pos_array, len);
+    if (err_code != OK)
+    {
+        free(pos_array);
+        error_handler(err_code);
+        return err_code;
+    }
     test_print(&result_sequential, 1);
+
+    position_t result_parallel;
+    err_code = average_value_parallel(&result_parallel, pos_array, len);
+    if (err_code != OK)
+    {
+        free(pos_array);
+        error_handler(err_code);
+        return err_code;
+    }
+    test_print(&result_parallel, 1);
+
 
     free(pos_array);
 

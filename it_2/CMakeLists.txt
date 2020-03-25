@@ -16,6 +16,8 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(INC
    include/types.h
    include/single_proc.h
+   include/multy_proc.h
+   include/read_data.h
 )
 
 set(SRC
@@ -23,14 +25,18 @@ set(SRC
     #source/memory_work.c
     source/work_data.c
     source/single_proc.c
+    source/multy_proc.c
 #    source/process.c
 )
+
+add_library(single_proc STATIC include/single_proc.h source/single_proc.c)
 
 add_executable(it_2
     ${INC}
     source/main.c
     ${SRC}
 )
+target_link_libraries(it_2 single_proc dl)
 
 #add_executable(my_test
     #${INC}

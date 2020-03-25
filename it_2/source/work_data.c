@@ -22,7 +22,7 @@ int read_data(position_t **pos_array, int *len, char *file_name)
         return ERROR_DATA;
     }
 
-    printf("len = %d", *len);
+    printf("len = %d\n", *len);
 
     *pos_array = malloc(sizeof(position_t) * (*len));
     if (!(*pos_array))
@@ -37,7 +37,6 @@ int read_data(position_t **pos_array, int *len, char *file_name)
             fscanf(file, "%lf", &(*pos_array)[i].y) != 1 ||
             fscanf(file, "%lf", &(*pos_array)[i].z) != 1)
         {
-            printf("scanf error\n");
             fclose(file);
             free(*pos_array);
 
@@ -47,5 +46,5 @@ int read_data(position_t **pos_array, int *len, char *file_name)
 
     fclose(file);
 
-    return 1;
+    return OK;
 }
