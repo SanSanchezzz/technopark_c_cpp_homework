@@ -27,7 +27,7 @@ inline static NanoSecs toNanoSecs(std::chrono::steady_clock::duration dur)
 {
     return std::chrono::duration_cast<NanoSecs>(dur);
 }
-void test_print(position_t *pos_array, int len)
+void test_print(const position_t *pos_array, const int len)
 {
     for (int i = 0; i < len; i++)
     {
@@ -35,10 +35,44 @@ void test_print(position_t *pos_array, int len)
     }
 }
 
+TEST(test_input, success) {
+    const char *file_name = "../other/test_in_1.txt";
+    int len;
+    position_t *pos_array;
+
+    read_data(&pos_array, &len, file_name);
+
+    for (int i = 0; i < len; i++)
+    {
+
+        EXPECT_EQ((int) pos_array[i].x, i * 3 + 1);
+        EXPECT_EQ((int) pos_array[i].y, i * 3 + 2);
+        EXPECT_EQ((int) pos_array[i].z, i * 3 + 3);
+    }
+
+    free(pos_array);
+
+}
+
+TEST(test_realisation, error) {
+    position_t result_parallel, result_sequential;
+    int return_parallel, return_sequential;
+    int len = -1;
+
+    position_t *pos_array;
+
+    return_sequential = average_value_sequential(&result_sequential, pos_array, len);
+
+    return_parallel = average_value_parallel(&result_parallel, pos_array, len);
+
+    EXPECT_EQ(return_parallel, ERROR_FUNC);
+    EXPECT_EQ(return_sequential, ERROR_FUNC);
+}
+
 TEST(test_realisation, data) {
     const char *file_name = "../other/data.txt";
     position_t result_parallel, result_sequential;
-   int len;
+    int len;
     position_t *pos_array;
 
     read_data(&pos_array, &len, file_name);

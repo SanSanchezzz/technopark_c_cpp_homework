@@ -2,6 +2,11 @@
 
 int average_value_sequential(position_t *result, const position_t *positions, const int len)
 {
+    if (positions == NULL || len <= 0)
+    {
+        return ERROR_FUNC;
+    }
+
     result->x = 0;
     result->y = 0;
     result->z = 0;

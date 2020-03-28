@@ -126,7 +126,7 @@ int set_borders(int **borders, int borders_qty, int len)
 {
     if (borders_qty <= 0)
     {
-        return -100;
+        return ERROR_FUNC;
     }
 
     *borders = (int*)malloc(sizeof(int) * borders_qty);
