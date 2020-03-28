@@ -23,10 +23,10 @@ before_install:
 
 before_script:
 - cd $DIR
-- mkdir build
 - cd other
 - python3 gendata.py
 - cd ../
+- mkdir build
 - cd build
 - cmake ../
 - make
