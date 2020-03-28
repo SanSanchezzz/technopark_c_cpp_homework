@@ -50,10 +50,9 @@ def gen_data_big_big_big():
     file.close()
 
 def main():
-    gen_data_small()
     gen_data()
     gen_data_big()
     gen_data_big_big()
-    # gen_data_big_big_big()
+    gen_data_big_big_big()
 if __name__ == '__main__':
     main()
