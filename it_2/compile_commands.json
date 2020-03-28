@@ -1,0 +1,52 @@
+[
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc -Dmulty_proc_EXPORTS -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage -fPIC   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/multy_proc.dir/source/multy_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/c++   -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/my_test.dir/source/my_test.cpp.o -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/my_test.cpp",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/my_test.cpp"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/my_test.dir/source/work_data.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/my_test.dir/source/single_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/my_test.dir/source/multy_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/single_proc.dir/source/single_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/it_2.dir/source/main.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/main.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/main.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/it_2.dir/source/work_data.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/work_data.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/it_2.dir/source/single_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/single_proc.c"
+},
+{
+  "directory": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build",
+  "command": "/usr/bin/cc  -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/build -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2 -I/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source  -g -O0 -fsanitize=address  -Wall -W -fprofile-arcs -ftest-coverage   -fprofile-arcs -ftest-coverage -std=gnu99 -o CMakeFiles/it_2.dir/source/multy_proc.c.o   -c /home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c",
+  "file": "/home/san_sanchez/TechnoPark/technopark_c_cpp_homework/it_2/source/multy_proc.c"
+}
+]

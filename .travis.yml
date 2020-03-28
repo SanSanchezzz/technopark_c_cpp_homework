@@ -1,0 +1,48 @@
+addons:
+  apt:
+    update: true
+    packages:
+    - valgrind
+    - cmake
+    - libgtest-dev
+    - lcov
+
+env:
+  - DIR=it_2
+  global:
+    - CODECOV_TOKEN=:850e2d23-50bf-4b17-b4a0-4c629a2bb777
+
+language: cpp
+
+before_install:
+- cd /usr/src/gtest
+- sudo cmake CMakeLists.txt || (cat CMakeFiles/CMakeError.log && CMakeFiles/CMakeOutput.log)
+- sudo make
+- sudo cp *.a /usr/lib
+- cd -
+
+before_script:
+- cd $DIR
+- mkdir build
+- cd other
+- python3 gendata.py
+- cd ../
+- cd build
+- cmake ../
+- make
+- ls
+
+jobs:
+  include:
+    - stage: "memcheck"
+      script: valgrind --error-exitcode=1 --leak-check=full -q ./it_2 < ../other/data.txt
+
+    - stage: "gtest"
+      script: ./my_test
+      after_success:
+      - lcov --directory . --capture --output-file coverage.info
+      - lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info
+      - lcov --list coverage.info
+      - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+
+after_script: make clean
