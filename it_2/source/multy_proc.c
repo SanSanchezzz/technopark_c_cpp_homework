@@ -1,9 +1,5 @@
 #include "multy_proc.h"
 
-int *set_borders(int borders_qty, int len);
-void border_sum(const int left_border, const int right_border, const position_t *positions, position_t *result);
-void child_work(const position_t *positions, const int *borders, const int num_child, position_t *tmp_result);
-
 int simple_example(position_t *result, const position_t *positions, const int len)
 {
     for (int i = 0; i < len; i++)
@@ -33,16 +29,15 @@ int average_value_parallel(position_t *result, const position_t *positions, cons
 
     int child_qty = get_nprocs();
 
-    pid_t pid;
+    pid_t pid, childs[child_qty];
 
     if (len < child_qty)
     {
-        simple_example(result, positions, len);
-        return OK;
+        return simple_example(result, positions, len);
     }
 
-    int *borders = set_borders(child_qty, len);
-    if (!borders)
+    int *borders ;
+    if (set_borders(&borders, child_qty, len))
     {
         return ERROR_ALLOC;
     }
@@ -62,7 +57,7 @@ int average_value_parallel(position_t *result, const position_t *positions, cons
         if (pid < 0)
         {
             perror("Fork\n");
-
+            free(borders);
             exit(FORK_ERROR);
         }
         if (pid == 0)
@@ -70,29 +65,23 @@ int average_value_parallel(position_t *result, const position_t *positions, cons
             child_work(positions, borders, i, &tmp_result[i]);
             exit(EXIT_SUCCESS);
         }
-    }
-    int status;
-    pid_t child_pid;
-
-    while ((child_pid = wait(&status)) != -1 && errno != ECHILD)
-    {
-        if (WIFEXITED(status))
-        {
-/*            printf("parent: child %d terminated normally with %d rc\n",*/
-                   /*child_pid, WEXITSTATUS(status));*/
-        }
         else
         {
-            printf("parent: child %d terminated abnormally with %d rc\n",
-                   child_pid, WEXITSTATUS(status));
+            childs[i] = pid;
         }
     }
-
-    if (errno != ECHILD)
+    if (pid > 0)
     {
-        perror("wait");
+        int status = 0;
+        for (int i = 0; i < child_qty; ++i)
+        {
+            waitpid(childs[i], &status, 0);
+            if (WIFSIGNALED(status))
+            {
+                printf("Error\n");
+            }
+        }
 
-        exit(1);
     }
     for (int i = 0; i < child_qty; i++)
     {
@@ -133,33 +122,33 @@ void child_work(const position_t *positions, const int *borders, const int num_c
     }
 }
 
-int *set_borders(int borders_qty, int len)
+int set_borders(int **borders, int borders_qty, int len)
 {
     if (borders_qty <= 0)
     {
-        return NULL;
+        return -100;
     }
 
-    int *borders = malloc(sizeof(int) * borders_qty);
+    *borders = (int*)malloc(sizeof(int) * borders_qty);
     if (!borders)
     {
-        return NULL;
+        return ERROR_ALLOC;
     }
 
     int step = len / borders_qty;
 
-    borders[0] = step - 1;
+    (*borders)[0] = step - 1;
     for (int i = 1; i < borders_qty; i++)
     {
-        if (i == borders_qty- 1)
+        if (i == (borders_qty - 1))
         {
-            borders[i] = len - 1;
+            (*borders)[i] = len - 1;
         }
         else
         {
-            borders[i] = borders[i - 1] + step;
+            (*borders)[i] = (*borders)[i - 1] + step;
         }
     }
 
-    return borders;
+    return OK;
 }

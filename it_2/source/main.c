@@ -5,8 +5,6 @@
 
 #include "types.h"
 #include "read_data.h"
-/*#include "single_proc.h"*/
-/*#include "multy_proc.h"*/
 
 void test_print(position_t *pos_array, int len)
 {
@@ -37,7 +35,7 @@ int main(int argc, char **argv)
     {
         error_handler(ERROR_LIB);
     }
-    // work there!
+
     char *file_name = argv[1];
 
     int err_code;
@@ -49,9 +47,9 @@ int main(int argc, char **argv)
     if (err_code != OK)
     {
         error_handler(err_code);
+        dlclose(my_lib);
         return err_code;
     }
-    /*test_print(pos_array, len);*/
 
     position_t result_sequential;
     err_code = average_value_sequential(&result_sequential, pos_array, len);
@@ -59,11 +57,11 @@ int main(int argc, char **argv)
     {
         free(pos_array);
         error_handler(err_code);
+        dlclose(my_lib);
         return err_code;
     }
     printf("sequential = ");
     print_pos(&result_sequential);
-    /*test_print(&result_sequential, 1);*/
 
     position_t result_parallel;
     int(*parallel_proc)(position_t *, const position_t *, const int) = dlsym(my_lib, "average_value_parallel");
@@ -71,20 +69,19 @@ int main(int argc, char **argv)
     {
         free(pos_array);
         error_handler(ERROR_LIB);
+        dlclose(my_lib);
         return ERROR_LIB;
     }
-/*    err_code = (int (*)(position_t *, position_t *, int))*/
-        /*[>(dlsym(my_lib, "average_value_parallel"));<]*/
     err_code = parallel_proc(&result_parallel, pos_array, len);
     if (err_code != OK)
     {
         free(pos_array);
         error_handler(err_code);
+        dlclose(my_lib);
         return err_code;
     }
     printf("parallel = ");
     print_pos(&result_parallel);
-    /*test_print(&result_parallel, 1);*/
 
     dlclose(my_lib);
     free(pos_array);
