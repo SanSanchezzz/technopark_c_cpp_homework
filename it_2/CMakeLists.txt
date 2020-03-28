@@ -37,7 +37,6 @@ target_link_libraries(it_2 single_proc dl)
 
 add_executable(my_test
     ${INC}
-    source/my_test.h
     source/my_test.cpp
     ${SRC})
 enable_testing()
