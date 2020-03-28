@@ -9,9 +9,6 @@ addons:
 
 env:
   - DIR=it_2
-  global:
-    - CODECOV_TOKEN=:850e2d23-50bf-4b17-b4a0-4c629a2bb777
-
 language: cpp
 
 before_install:
