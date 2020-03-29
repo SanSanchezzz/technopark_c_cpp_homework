@@ -6,7 +6,7 @@
 #include "types.h"
 #include "read_data.h"
 
-void test_print(position_t *pos_array, int len)
+void test_print(const position_t *pos_array, const int len)
 {
     for (int i = 0; i < len; i++)
     {
