@@ -1,5 +1,23 @@
 import random
 
+def gen_data_error_1():
+    file = open('gen_data_error_1.txt', 'w')
+
+    file.write(str(-1) + '\n')
+
+    file.close()
+
+def gen_data_error_2():
+    file = open('gen_data_error_2.txt', 'w')
+
+    file.write(str(5) + '\n')
+    file.write('1 2 3\n')
+    file.write('4 5\n')
+    file.write('Вышел зайчик погулять\n')
+
+    file.close()
+
+
 def gen_test_in():
     file = open('test_in_1.txt', 'w')
 
@@ -62,6 +80,8 @@ def gen_data_big_big_big():
     file.close()
 
 def main():
+    gen_data_error_1()
+    gen_data_error_2()
     gen_test_in()
     gen_data()
     gen_data_big()

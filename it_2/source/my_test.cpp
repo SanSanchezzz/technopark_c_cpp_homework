@@ -53,7 +53,25 @@ TEST(test_input, success) {
     free(pos_array);
 
 }
+TEST(test_input, error_1) {
+    const char *file_name = "../other/gen_data_error_1.txt";
+    int error_code, len;
+    position_t *pos_array;
 
+    error_code = read_data(&pos_array, &len, file_name);
+
+    EXPECT_EQ(error_code, ERROR_DATA);
+}
+
+TEST(test_input, error_2) {
+    const char *file_name = "../other/gen_data_error_2.txt";
+    int error_code, len;
+    position_t *pos_array;
+
+    error_code = read_data(&pos_array, &len, file_name);
+
+    EXPECT_EQ(error_code, ERROR_DATA);
+}
 TEST(test_realisation, error) {
     position_t result_parallel, result_sequential;
     int return_parallel, return_sequential;
